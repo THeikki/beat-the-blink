@@ -8,13 +8,11 @@ import questionData from "../../../data/questions.json";
 export const SummaryModal = () => {
   const navigate = useNavigate();
 
-  // HAETAAN PISTEET: Käytetään correctAnswers-nimeä, joka määriteltiin storessa
   const correctAnswers = useGameStore((state) => state.correctAnswers);
   const initializeGame = useGameStore((state) => state.initializeGame);
   const setShowSummary = useGameStore((state) => state.setShowSummary);
 
   const handleResumeClick = () => {
-    // initializeGame nollaa correctAnswers-tilanteen ja aloittaa alusta
     initializeGame(questionData.questions);
   };
 
@@ -23,7 +21,6 @@ export const SummaryModal = () => {
     navigate("/");
   };
 
-  // Logiikka mitalien näyttämiseen pisteiden perusteella
   if (correctAnswers >= 8) {
     return (
       <GoldenModal

@@ -7,6 +7,7 @@ import { CorrectAnswerModal } from "../modals/CorrectAnswerModal";
 import { SummaryModal } from "../modals/summary/SummaryModal";
 import { AttentionModal } from "../modals/AttentionModal";
 import { TimerLogic } from "../TimerLogic";
+import { WrongAnswerModal } from "../modals/WrongAnswerModal";
 
 export const GameView = () => {
   const {
@@ -18,12 +19,17 @@ export const GameView = () => {
     showSummary,
     showAttention,
     timeLeft,
+    showWrongAnswer,
   } = useGameStore();
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   const isModalOpen =
-    showCorrectAnswer || showSummary || showAttention || timeLeft < 0;
+    showCorrectAnswer ||
+    showSummary ||
+    showAttention ||
+    showWrongAnswer ||
+    timeLeft < 0;
 
   useEffect(() => {
     if (!isModalOpen && inputRef.current) {
@@ -47,7 +53,8 @@ export const GameView = () => {
       <TimerLogic />
 
       {showCorrectAnswer && <CorrectAnswerModal />}
-      {(timeLeft < 0 || showSummary) && <SummaryModal />}
+      {showWrongAnswer && <WrongAnswerModal />}
+      {showSummary && <SummaryModal />}
       {showAttention && <AttentionModal />}
 
       <div className="max-w-2xl w-full text-center space-y-4 md:space-y-12">

@@ -11,7 +11,7 @@ export const InstructionsModal = () => {
   return (
     <div
       id="how-to-play-modal"
-      className="fixed inset-0 z-[60] flex items-center justify-center bg-slate-950/90 backdrop-blur-md px-4"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/90 backdrop-blur-md px-4"
     >
       <div className="bg-slate-900 border border-slate-700 w-full max-w-md rounded-3xl shadow-2xl overflow-hidden relative">
         <div className="absolute -top-24 -left-24 w-48 h-48 bg-cyan-500/10 rounded-full blur-3xl"></div>

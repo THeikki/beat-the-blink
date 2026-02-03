@@ -17,6 +17,7 @@ interface GameState {
   showAttention: boolean;
   showError: boolean;
   showInstructions: boolean;
+  showWrongAnswer: boolean
 
   // Actions
   initializeGame: (allQuestions: Question[]) => void;
@@ -29,6 +30,7 @@ interface GameState {
   setShowSummary: (val: boolean) => void;
   setShowError: (val: boolean) => void;
   setShowInstructions: (val: boolean) => void;
+  setShowWrongAnswer: (val: boolean) => void
 }
 
 export const useGameStore = create<GameState>((set) => ({
@@ -43,6 +45,7 @@ export const useGameStore = create<GameState>((set) => ({
   showAttention: false,
   showError: false,
   showInstructions: false,
+  showWrongAnswer: false,
 
   initializeGame: (allQuestions) => {
     const shuffled = [...allQuestions].sort(() => Math.random() - 0.5);
@@ -58,15 +61,22 @@ export const useGameStore = create<GameState>((set) => ({
       correctAnswers: 0,
       showSummary: false,
       showCorrectAnswer: false,
+      showWrongAnswer: false,
     });
   },
 
   setAnswer: (val) => set({ answer: val }),
 
   decreaseTime: () =>
-    set((state) => ({
-      timeLeft: state.timeLeft - 1,
-    })),
+    set((state) => {
+      if (state.timeLeft !== 0) return {
+        timeLeft: state.timeLeft - 1
+      }
+      return {
+        showSummary: true,
+        showWrongAnswer: true,
+      }
+    }),
 
   increaseCorrectAnswers: () =>
     set((state) => ({
@@ -97,4 +107,5 @@ export const useGameStore = create<GameState>((set) => ({
   setShowSummary: (val) => set({ showSummary: val }),
   setShowError: (val) => set({ showError: val }),
   setShowInstructions: (val) => set({ showInstructions: val }),
+  setShowWrongAnswer: (val) => set({ showWrongAnswer: val })
 }));
