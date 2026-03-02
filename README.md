@@ -1,75 +1,33 @@
-# React + TypeScript + Vite
+# ⚡ Beat the Blink – AI-Powered Quiz Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Beat the Blink on dynaaminen ja nopeatempoinen tietokilpailupeli, joka yhdistää generatiivisen tekoälyn ja optimoidun frontend-arkkitehtuurin. Peli on suunniteltu osoittamaan kykyä rakentaa vikasietoisia (resilient) sovelluksia, jotka hallitsevat AI-rajapintojen rajoituksia älykkäästi.
 
-Currently, two official plugins are available:
+**Live Demo:** [https://beat-the-blink.vercel.app](https://beat-the-blink.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Keskeiset ominaisuudet
+*   **Hybrid Content Generation:** Peli luo dynaamisesti 10 uniikkia kysymys-vastausparia LLM-mallin avulla jokaisen uuden session alussa.
+*   **Intelligent Fallback System:** API-kiintiöiden ylittyessä tai verkkohäiriöiden sattuessa sovellus siirtyy saumattomasti hyödyntämään paikallista, n. 400 kysymyksen JSON-tietovarastoa.
+*   **Real-time Interaction:** Nopea ja responsiivinen pelilogiikka, joka on optimoitu matalalle viiveelle.
+*   **Modern UI/UX:** Tailwind CSS:llä toteutettu visuaalisesti houkutteleva ja pelillistetty käyttöliittymä.
 
-## React Compiler
+## 🛠️ Teknologiapino
+*   **Frontend:** [React 18](https://react.dev) & [TypeScript](https://www.typescriptlang.org)
+*   **AI-integraatio:** [Google Gemini API](https://ai.google.dev) (tai vastaava LLM-rajapinta)
+*   **Tyylittely:** [Tailwind CSS](https://tailwindcss.com)
+*   **Julkaisu:** [Vercel](https://vercel.com) (Automated CI/CD)
+*   **Tietovarasto:** Paikallinen JSON-pohjainen tietokanta fallback-tilanteita varten.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## 📝 Arkkitehtoninen ratkaisu: API-resilienssi
+Projektissa on ratkaistu yleinen AI-sovellusten haaste: ilmaisien rajapintojen (Free Tier) hitaus ja pyyntörajoitukset. 
+1. **Primary Source:** Sovellus yrittää ensisijaisesti generoida tuoretta sisältöä tekoälyllä.
+2. **Secondary Source:** Jos AI-pyyntö epäonnistuu tai pelaaja jatkaa peliä nopeasti, järjestelmä poimii kysymykset sovelluksen sisäisestä JSON-rakenteesta.
+Tämä varmistaa, ettei pelaaja kohtaa koskaan virheilmoituksia tai tyhjiä ruutuja, vaikka taustajärjestelmä saavuttaisi kapasiteettinsa.
 
-Note: This will impact Vite dev & build performances.
+## 🚥 Paikallinen kehitys
+1. Kloonaa repo: `git clone [url]`
+2. Asenna riippuvuudet: `npm install`
+3. Aseta ympäristömuuttujat: Luo `.env` ja lisää `VITE_AI_API_KEY`
+4. Käynnistä peli: `npm run dev`
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+Tekijä: Heikki Törmänen
