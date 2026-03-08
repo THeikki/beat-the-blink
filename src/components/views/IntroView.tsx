@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getQuestions } from "../../actions";
 import { useGameStore } from "../../store/gameStore";
 import { FallbackModal } from "../modals/FallbackModal";
 
@@ -15,10 +14,16 @@ export const IntroView = () => {
   const handleStart = async () => {
     setLoading(true);
     try {
-      const result = await getQuestions();
+      const response = await fetch("/api/getQuestions");
 
-      if (result.success && result.data) {
-        initializeGame(result.data);
+      if (!response.ok) {
+        throw new Error("Verkkovirhe");
+      }
+
+      const data = await response.json();
+
+      if (data && Array.isArray(data)) {
+        initializeGame(data);
         navigate("/game");
       } else {
         setShowErrorModal(true);
